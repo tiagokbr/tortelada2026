@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tortelada 2026 — Acompanhamento</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --P:#7B2D42;--PL:#9B3D52;--PD:#5B1D32;
+  --G:#C9973A;--GL:#E8B84B;
+  --CR:#FAF7F2;--TD:#2C1810;--TM:#5A4040;--TL:#9B8080;
+  --OK:#1E6E3E;--OKL:#D4F0E3;--WN:#B8640A;--WNL:#FFF0D4;
+  --ER:#B52B1A;--ERL:#FDDDD9;--BD:#E8DDD0;
+  --SH:0 2px 12px rgba(44,24,16,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--CR);color:var(--TD);min-height:100vh}
+.hdr{background:linear-gradient(135deg,var(--PD),var(--P) 55%,var(--PL));color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 4px 24px rgba(91,29,50,.5)}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid rgba(255,255,255,.12)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-ico{width:42px;height:42px;background:var(--G);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.brand h1{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;line-height:1.2}
+.brand p{font-size:.68rem;opacity:.75;margin-top:1px}
+.ro-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:4px 10px;border-radius:20px;font-size:.68rem;font-weight:800}
+.hstats{display:flex;gap:18px;padding:10px 18px;border-bottom:1px solid rgba(255,255,255,.12)}
+.hs{text-align:center}
+.hs-v{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--GL)}
+.hs-l{font-size:.6rem;opacity:.7;text-transform:uppercase;letter-spacing:.6px}
+.nav{display:flex;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-btn{padding:9px 16px;font-size:.8rem;font-weight:700;color:rgba(255,255,255,.65);cursor:pointer;border:none;background:none;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s;font-family:'Nunito',sans-serif}
+.nav-btn.on{color:var(--GL);border-bottom-color:var(--G)}
+.main{padding:16px;max-width:1200px;margin:0 auto}
+.ts{display:none}.ts.on{display:block}
+.card{background:#fff;border-radius:14px;box-shadow:var(--SH);overflow:hidden;margin-bottom:16px}
+.ch{padding:13px 18px;border-bottom:1px solid var(--BD);display:flex;align-items:center;justify-content:space-between}
+.ct{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--P);font-weight:600}
+.cb{padding:16px}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.sc{background:#fff;border-radius:12px;padding:14px 15px;box-shadow:var(--SH);border-left:4px solid var(--P);position:relative;overflow:hidden}
+.sc.g{border-left-color:var(--G)}.sc.ok{border-left-color:var(--OK)}.sc.wn{border-left-color:var(--WN)}.sc.er{border-left-color:var(--ER)}
+.sl{font-size:.65rem;text-transform:uppercase;letter-spacing:.9px;color:var(--TL);font-weight:700;margin-bottom:5px}
+.sv{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--TD)}
+.ss{font-size:.65rem;color:var(--TL);margin-top:3px}
+.si{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:2rem;opacity:.07}
+.pw{background:var(--BD);border-radius:6px;height:10px}
+.pb{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--P),var(--PL));transition:width .6s}
+.pr{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid var(--BD);gap:12px}
+.pr:last-child{border-bottom:none}
+.tc{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.8rem}
+th{background:var(--CR);padding:9px 11px;text-align:left;font-size:.65rem;text-transform:uppercase;letter-spacing:.9px;color:var(--TL);font-weight:800;border-bottom:2px solid var(--BD);white-space:nowrap}
+td{padding:9px 11px;border-bottom:1px solid var(--BD);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#FBF8F5}
+.sf td{font-weight:800;background:var(--CR);border-top:2px solid var(--BD)}
+.sf:hover td{background:var(--CR)}
+.bdg{display:inline-flex;align-items:center;padding:2px 7px;border-radius:20px;font-size:.65rem;font-weight:800}
+.bdg-ok{background:var(--OKL);color:#1A5C35}
+.bdg-wn{background:var(--WNL);color:#7A4500}
+.bdg-inf{background:#D4E8FF;color:#1A4080}
+.mg{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.mc{background:#fff;border-radius:10px;padding:10px 12px;box-shadow:var(--SH)}
+.mn{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--P);line-height:1}
+.ml2{font-size:.58rem;text-transform:uppercase;letter-spacing:.5px;color:var(--TL);margin-bottom:5px}
+.mbw{background:var(--BD);border-radius:4px;height:5px;margin:6px 0 4px}
+.mbb{height:100%;border-radius:4px;background:var(--OK)}
+.mbb.fu{background:var(--ER)}.mbb.al{background:var(--WN)}
+.mct{font-size:.68rem;color:var(--TM);font-weight:700}
+.leg{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.leg-i{font-size:.7rem;display:flex;align-items:center;gap:5px}
+.leg-c{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+.pxv{color:#1565C0;font-weight:800}.dnv{color:#1E6E3E;font-weight:800}
+.ctv{color:#6A1B9A;font-weight:800}.slv{color:var(--ER);font-weight:800}
+.tm{display:inline-block;background:var(--P);color:#fff;border-radius:5px;padding:1px 6px;font-size:.68rem;font-weight:800}
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:70vh;gap:14px}
+.spinner{width:44px;height:44px;border:4px solid var(--BD);border-top-color:var(--P);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.loading p{color:var(--TL);font-size:.88rem}
+.sync-dot{position:fixed;bottom:16px;left:16px;background:var(--TD);color:#fff;padding:6px 12px;border-radius:20px;font-size:.7rem;font-weight:800;z-index:999;display:flex;align-items:center;gap:6px;box-shadow:var(--SH)}
+.sync-dot .sd{width:7px;height:7px;border-radius:50%;background:#888;flex-shrink:0}
+.sync-dot.ok .sd{background:#4CAF50;animation:pulse 2s infinite}
+.sync-dot.err .sd{background:var(--ER)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@media(max-width:580px){.sg{grid-template-columns:1fr 1fr}.sv{font-size:1.1rem}}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="brand">
+      <div class="brand-ico">✝</div>
+      <div>
+        <h1>Tortelada do Cenáculo 2026</h1>
+        <p>Cenáculo de Maria · Painel de Acompanhamento</p>
+      </div>
+    </div>
+    <div class="ro-badge">👁️ Somente Leitura</div>
+  </div>
+  <div class="hstats">
+    <div class="hs"><div class="hs-v" id="hs-p">—</div><div class="hs-l">Pessoas</div></div>
+    <div class="hs"><div class="hs-v" id="hs-a">—</div><div class="hs-l">Arrecadado</div></div>
+    <div class="hs"><div class="hs-v" id="hs-s">—</div><div class="hs-l">A Receber</div></div>
+    <div class="hs"><div class="hs-v" id="hs-lot">—</div><div class="hs-l">Ocupação</div></div>
+  </div>
+  <div class="nav">
+    <button class="nav-btn on" onclick="mudarAba('dash')">📊 Resumo</button>
+    <button class="nav-btn" onclick="mudarAba('ing')">🎟️ Ingressos</button>
+    <button class="nav-btn" onclick="mudarAba('mesa')">🪑 Mesas</button>
+    <button class="nav-btn" onclick="mudarAba('acol')">📋 Acolhida</button>
+  </div>
+</div>
+
+<div class="main">
+  <div id="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Carregando dados em tempo real...</p>
+  </div>
+
+  <div id="ts-dash" class="ts">
+    <div class="sg">
+      <div class="sc g"><div class="sl">Total Arrecadado</div><div class="sv" id="ds-tot">—</div><div class="ss" id="ds-tots"></div><div class="si">💰</div></div>
+      <div class="sc ok"><div class="sl">Ingressos Recebidos</div><div class="sv" id="ds-ing">—</div><div class="ss" id="ds-ings"></div><div class="si">✅</div></div>
+      <div class="sc wn"><div class="sl">A Receber</div><div class="sv" id="ds-ar">—</div><div class="ss" id="ds-ars"></div><div class="si">⏳</div></div>
+      <div class="sc er"><div class="sl">Total Despesas</div><div class="sv" id="ds-dep">—</div><div class="ss" id="ds-deps"></div><div class="si">📦</div></div>
+      <div class="sc"><div class="sl">Resultado Líquido</div><div class="sv" id="ds-res">—</div><div class="ss">Arrecadado − Despesas</div><div class="si">📈</div></div>
+      <div class="sc"><div class="sl">Pessoas</div><div class="sv" id="ds-pess">—</div><div class="ss" id="ds-pesss"></div><div class="si">👥</div></div>
+    </div>
+    <div class="card">
+      <div class="cb">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+          <span style="font-weight:800;font-size:.88rem">📊 Lotação do Evento</span>
+          <span id="lot-txt" style="font-size:.8rem;color:var(--TL)">—</span>
+        </div>
+        <div class="pw"><div class="pb" id="lot-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="card">
+        <div class="ch"><span class="ct">💳 Formas de Pagamento</span></div>
+        <div class="cb">
+          <div class="pr"><span style="font-size:1.2rem">📲</span><div style="flex:1"><div style="font-size:.7rem;color:var(--TL)">PIX</div><div class="pxv" id="ds-pix">—</div></div></div>
+          <div class="pr"><span style="font-size:1.2rem">💵</span><div style="flex:1"><div style="font-size:.7rem;color:var(--TL)">Dinheiro</div><div class="dnv" id="ds-din">—</div></div></div>
+          <div class="pr"><span style="font-size:1.2rem">💳</span><div style="flex:1"><div style="font-size:.7rem;color:var(--TL)">Cartão</div><div class="ctv" id="ds-car">—</div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ch"><span class="ct">➕ Entradas Extras</span></div>
+        <div class="cb">
+          <div class="pr"><span style="font-size:1.2rem">💸</span><div style="flex:1"><div style="font-size:.7rem;color:var(--TL)">Aporte</div><div style="font-weight:800" id="ds-apt">—</div></div></div>
+          <div class="pr"><span style="font-size:1.2rem">🎯</span><div style="flex:1"><div style="font-size:.7rem;color:var(--TL)">Rifão</div><div style="font-weight:800" id="ds-rif">—</div></div></div>
+          <div class="pr"><span style="font-size:1.2rem">🙏</span><div style="flex:1"><div style="font-size:.7rem;color:var(--TL)">Doações</div><div style="font-weight:800" id="ds-doa">—</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="ts-ing" class="ts">
+    <div class="card">
+      <div class="ch"><span class="ct">🎟️ Ingressos Vendidos</span><span id="ing-total" style="font-size:.78rem;color:var(--TL)"></span></div>
+      <div class="cb">
+        <input type="text" id="srI" placeholder="🔍 Buscar nome ou mesa..." oninput="renderIngressos()"
+          style="width:100%;padding:9px 12px;border:2px solid var(--BD);border-radius:8px;font-size:.83rem;font-family:'Nunito',sans-serif;margin-bottom:14px;color:var(--TD);outline:none">
+      </div>
+      <div class="tc">
+        <table>
+          <thead><tr>
+            <th>Responsável</th><th>Qtd</th><th>Ad/Cr/Is</th>
+            <th>Valor</th><th>PIX</th><th>Dinheiro</th><th>Cartão</th>
+            <th>Saldo</th><th>Mesa</th><th>Status</th>
+          </tr></thead>
+          <tbody id="tbI"></tbody>
+          <tfoot><tr class="sf" id="tfI"></tr></tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="ts-mesa" class="ts">
+    <div class="card">
+      <div class="cb" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+        <div><div class="sl">Mesas</div><div style="font-weight:800;font-size:1.1rem" id="ms-tot">—</div></div>
+        <div><div class="sl">Pessoas Alocadas</div><div style="font-weight:800;font-size:1.1rem" id="ms-pess">—</div></div>
+        <div><div class="sl">Lugares Livres</div><div style="font-weight:800;font-size:1.1rem" id="ms-disp">—</div></div>
+      </div>
+    </div>
+    <div class="leg">
+      <div class="leg-i"><div class="leg-c" style="background:var(--OK)"></div>Disponível</div>
+      <div class="leg-i"><div class="leg-c" style="background:var(--WN)"></div>Quase cheia</div>
+      <div class="leg-i"><div class="leg-c" style="background:var(--ER)"></div>Lotada</div>
+    </div>
+    <div class="mg" id="mg"></div>
+  </div>
+
+  <div id="ts-acol" class="ts">
+    <div class="card">
+      <div class="ch"><span class="ct">📋 Lista de Presença</span><span id="acol-total" style="font-size:.78rem;color:var(--TL)"></span></div>
+      <div class="tc">
+        <table>
+          <thead><tr>
+            <th style="background:var(--P);color:#fff">#</th>
+            <th style="background:var(--P);color:#fff">Responsável</th>
+            <th style="background:var(--P);color:#fff">Mesa</th>
+            <th style="background:var(--P);color:#fff">Ad</th>
+            <th style="background:var(--P);color:#fff">Cr</th>
+            <th style="background:var(--P);color:#fff">Is</th>
+            <th style="background:var(--P);color:#fff">Total</th>
+            <th style="background:var(--P);color:#fff">Pgto</th>
+            <th style="background:var(--P);color:#fff">Obs</th>
+          </tr></thead>
+          <tbody id="tbA"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sync-dot" id="syncdot"><div class="sd"></div><span id="synctxt">Conectando...</span></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+import { getFirestore, collection, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD--FI-UWKE-SBMuXaEOQnIvp4Cl6FZnMo",
+  authDomain: "tortelada2026.firebaseapp.com",
+  projectId: "tortelada2026",
+  storageBucket: "tortelada2026.firebasestorage.app",
+  messagingSenderId: "297460338929",
+  appId: "1:297460338929:web:fd6ca535f372a42a47d950"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let ings=[], deps=[], cfg={lot:692,pa:70,pc:30,apt:2000,rif:0,doa:0,nm:38,cap:18}, chk={};
+let ready=false;
+
+const fmt = v=>'R$ '+(+v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtK = v=>{const n=+v||0;return n>=1000?'R$'+(n/1000).toFixed(1)+'k':fmt(n);};
+const set = (id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+
+function setSyncStatus(s){
+  const dot=document.getElementById('syncdot');
+  const txt=document.getElementById('synctxt');
+  dot.className='sync-dot '+s;
+  txt.textContent=s==='ok'?'🟢 Ao vivo':s==='err'?'❌ Sem conexão':'Conectando...';
+}
+
+const ABAS=['dash','ing','mesa','acol'];
+window.mudarAba = name=>{
+  document.querySelectorAll('.ts').forEach(e=>e.classList.remove('on'));
+  document.querySelectorAll('.nav-btn').forEach(e=>e.classList.remove('on'));
+  document.getElementById('ts-'+name).classList.add('on');
+  document.querySelectorAll('.nav-btn')[ABAS.indexOf(name)].classList.add('on');
+  if(name==='dash') renderDash();
+  if(name==='ing') renderIngressos();
+  if(name==='mesa') renderMesas();
+  if(name==='acol') renderAcolhida();
+};
+
+window.renderIngressos = ()=>{
+  const sr=(document.getElementById('srI').value||'').toLowerCase();
+  const items=ings.filter(i=>!sr||i.cen.toLowerCase().includes(sr)||(i.mes&&i.mes.toLowerCase().includes(sr)));
+  set('ing-total',items.length+' registros · '+items.reduce((s,i)=>s+(i.qtd||0),0)+' pessoas');
+  const tb=document.getElementById('tbI');
+  if(!items.length){
+    tb.innerHTML='<tr><td colspan="10" style="text-align:center;padding:40px;color:var(--TL)">Nenhum ingresso encontrado</td></tr>';
+    document.getElementById('tfI').innerHTML='';return;
+  }
+  tb.innerHTML=items.map(i=>{
+    const badge=i.sld>0?'<span class="bdg bdg-wn">⚠️ Pendente</span>':i.sta==='isento'?'<span class="bdg bdg-inf">🆓 Isento</span>':'<span class="bdg bdg-ok">✅ Pago</span>';
+    return `<tr>
+      <td><strong>${i.cen}</strong>${i.tal?`<br><small style="color:var(--TL)">Talão ${i.tal}</small>`:''}</td>
+      <td><strong>${i.qtd||0}</strong></td>
+      <td style="color:var(--TM)">${i.adu||0}/${i.cri||0}/${i.iso||0}</td>
+      <td><strong>${fmt(i.val)}</strong></td>
+      <td class="pxv">${i.pix>0?fmt(i.pix):'—'}</td>
+      <td class="dnv">${i.din>0?fmt(i.din):'—'}</td>
+      <td class="ctv">${i.car>0?fmt(i.car):'—'}</td>
+      <td class="${i.sld>0?'slv':''}">${i.sld>0?fmt(i.sld):'—'}</td>
+      <td>${i.mes?`<span class="tm">${i.mes}</span>`:'—'}</td>
+      <td>${badge}</td>
+    </tr>`;
+  }).join('');
+  const tQ=items.reduce((s,i)=>s+(i.qtd||0),0);
+  const tV=items.reduce((s,i)=>s+(i.val||0),0);
+  const tP=items.reduce((s,i)=>s+(i.pix||0),0);
+  const tD=items.reduce((s,i)=>s+(i.din||0),0);
+  const tC=items.reduce((s,i)=>s+(i.car||0),0);
+  const tS=items.reduce((s,i)=>s+(i.sld||0),0);
+  document.getElementById('tfI').innerHTML=`
+    <td><strong>TOTAL — ${items.length} reg.</strong></td>
+    <td><strong>${tQ}</strong></td><td></td>
+    <td><strong>${fmt(tV)}</strong></td>
+    <td class="pxv">${fmt(tP)}</td><td class="dnv">${fmt(tD)}</td><td class="ctv">${fmt(tC)}</td>
+    <td class="slv">${fmt(tS)}</td><td colspan="2"></td>`;
+};
+
+function renderDash(){
+  const tPx=ings.reduce((s,i)=>s+(i.pix||0),0);
+  const tDn=ings.reduce((s,i)=>s+(i.din||0),0);
+  const tCr=ings.reduce((s,i)=>s+(i.car||0),0);
+  const tIng=tPx+tDn+tCr;
+  const tSld=ings.reduce((s,i)=>s+Math.max(0,i.sld||0),0);
+  const tArc=tIng+(cfg.apt||0)+(cfg.rif||0)+(cfg.doa||0);
+  const tDep=deps.reduce((s,d)=>s+(d.val||0),0);
+  const tRes=tArc-tDep;
+  const tP=ings.reduce((s,i)=>s+(i.qtd||0),0);
+  const lot=cfg.lot||692;
+  const pct=Math.min(100,Math.round((tP/lot)*100));
+  set('ds-tot',fmt(tArc));set('ds-tots',ings.length+' registros');
+  set('ds-ing',fmt(tIng));set('ds-ings',ings.length+' vendas');
+  set('ds-ar',fmt(tSld));set('ds-ars',ings.filter(i=>i.sld>0).length+' pendente(s)');
+  set('ds-dep',fmt(tDep));set('ds-deps',deps.length+' lançamento(s)');
+  set('ds-pess',tP);set('ds-pesss','de '+lot+' lugares');
+  const resEl=document.getElementById('ds-res');
+  if(resEl){resEl.textContent=fmt(tRes);resEl.style.color=tRes>=0?'var(--OK)':'var(--ER)';}
+  set('lot-txt',tP+' / '+lot+' ('+pct+'%)');
+  const bar=document.getElementById('lot-bar');if(bar)bar.style.width=pct+'%';
+  set('ds-pix',fmt(tPx));set('ds-din',fmt(tDn));set('ds-car',fmt(tCr));
+  set('ds-apt',fmt(cfg.apt||0));set('ds-rif',fmt(cfg.rif||0));set('ds-doa',fmt(cfg.doa||0));
+  document.getElementById('hs-p').textContent=tP;
+  document.getElementById('hs-a').textContent=fmtK(tArc);
+  document.getElementById('hs-s').textContent=fmtK(tSld);
+  document.getElementById('hs-lot').textContent=pct+'%';
+}
+
+function renderMesas(){
+  const cap=cfg.cap||18;
+  const mesas={};
+  for(let i=1;i<=(cfg.nm||38);i++)mesas[i]={n:i,p:0,c:cap};
+  ings.forEach(ing=>{
+    if(!ing.mes)return;
+    const ns=ing.mes.toString().match(/\d+/g);
+    if(!ns)return;
+    ns.forEach(x=>{const n=parseInt(x);if(!mesas[n])mesas[n]={n,p:0,c:cap};mesas[n].p+=Math.round(ing.qtd/ns.length);});
+  });
+  let totP=0,totC=0;
+  document.getElementById('mg').innerHTML=Object.values(mesas).sort((a,b)=>a.n-b.n).map(m=>{
+    const pct=Math.min(100,Math.round((m.p/m.c)*100));
+    const bc=pct>=100?'fu':pct>=80?'al':'';
+    totP+=m.p;totC+=m.c;
+    return `<div class="mc"><div class="ml2">Mesa</div><div class="mn">${m.n}</div>
+      <div class="mbw"><div class="mbb ${bc}" style="width:${pct}%"></div></div>
+      <div class="mct">${m.p} / ${m.c}</div></div>`;
+  }).join('');
+  set('ms-tot',Object.keys(mesas).length);
+  set('ms-pess',totP);
+  set('ms-disp',Math.max(0,totC-totP));
+}
+
+function renderAcolhida(){
+  const items=[...ings].sort((a,b)=>{
+    const ma=parseInt(a.mes)||9999,mb=parseInt(b.mes)||9999;
+    return ma!==mb?ma-mb:a.cen.localeCompare(b.cen);
+  });
+  set('acol-total',items.length+' reservas · '+items.reduce((s,i)=>s+(i.qtd||0),0)+' pessoas');
+  document.getElementById('tbA').innerHTML=items.map((i,idx)=>{
+    const ck=chk[i.id];
+    const badge=i.sld>0?'<span class="bdg bdg-wn">⚠️ Saldo</span>':'<span class="bdg bdg-ok">✅ Pago</span>';
+    return `<tr style="${ck?'background:#F0FFF6':''}">
+      <td>${idx+1}</td>
+      <td><strong>${i.cen}</strong>${ck?' <span style="font-size:.65rem;color:var(--OK);font-weight:800">✅ Presente</span>':''}</td>
+      <td><span class="tm">${i.mes||'—'}</span></td>
+      <td style="text-align:center">${i.adu||0}</td>
+      <td style="text-align:center">${i.cri||0}</td>
+      <td style="text-align:center">${i.iso||0}</td>
+      <td style="text-align:center"><strong>${i.qtd||0}</strong></td>
+      <td>${badge}</td>
+      <td style="font-size:.7rem;color:var(--TL)">${i.obs||''}</td>
+    </tr>`;
+  }).join('');
+}
+
+// LISTENERS
+onSnapshot(collection(db,'ingressos'),snap=>{
+  ings=snap.docs.map(d=>({id:d.id,...d.data()}));
+  setSyncStatus('ok');
+  if(ready){renderDash();renderIngressos();renderMesas();renderAcolhida();}
+},()=>setSyncStatus('err'));
+
+onSnapshot(collection(db,'despesas'),snap=>{
+  deps=snap.docs.map(d=>({id:d.id,...d.data()}));
+  if(ready)renderDash();
+},()=>setSyncStatus('err'));
+
+onSnapshot(doc(db,'config','geral'),snap=>{
+  if(snap.exists())cfg={...cfg,...snap.data()};
+  if(ready)renderDash();
+});
+
+onSnapshot(doc(db,'checkins','lista'),snap=>{
+  if(snap.exists())chk=snap.data()||{};
+  if(ready)renderAcolhida();
+});
+
+setTimeout(()=>{
+  document.getElementById('loading').style.display='none';
+  ready=true;
+  mudarAba('dash');
+},1400);
+</script>
+</body>
+</html>
