@@ -7,16 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --P:#7B2D42; --PL:#9B3D52; --PD:#5B1D32;
-  --G:#C9973A; --GL:#E8B84B;
-  --CR:#FAF7F2; --W:#FFFFFF;
-  --TD:#2C1810; --TM:#5A4040; --TL:#9B8080;
+  --P:#1E3A8A; --PL:#2E50C8; --PD:#142270;
+  --G:#5B8DD9; --GL:#7AAEE8;
+  --CR:#F0F4FF; --W:#FFFFFF;
+  --TD:#0F1F5C; --TM:#2D3F8A; --TL:#6B7DB5;
   --OK:#1E6E3E; --OKL:#D4F0E3;
   --WN:#B8640A; --WNL:#FFF0D4;
   --ER:#B52B1A; --ERL:#FDDDD9;
-  --BD:#E8DDD0;
-  --SH:0 2px 12px rgba(44,24,16,.1);
-  --SHL:0 8px 32px rgba(44,24,16,.18);
+  --BD:#C8D5F0;
+  --SH:0 2px 12px rgba(15,31,92,.1);
+  --SHL:0 8px 32px rgba(15,31,92,.18);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:var(--CR);color:var(--TD);min-height:100vh}
@@ -33,10 +33,10 @@ body{font-family:'Inter',sans-serif;background:var(--CR);color:var(--TD);min-hei
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
 /* HEADER */
-.hdr{background:linear-gradient(135deg,var(--PD) 0%,var(--P) 55%,var(--PL) 100%);color:#fff;position:sticky;top:0;z-index:200;box-shadow:0 4px 24px rgba(91,29,50,.5)}
+.hdr{background:linear-gradient(135deg,#142270 0%,#1E3A8A 50%,#2E50C8 100%);color:#fff;position:sticky;top:0;z-index:200;box-shadow:0 4px 24px rgba(20,34,112,.5)}
 .hdr-top{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid rgba(255,255,255,.12)}
 .brand{display:flex;align-items:center;gap:12px}
-.brand-ico{width:42px;height:42px;background:var(--G);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.brand-ico{width:42px;height:42px;background:#5B8DD9;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.2)}
 .brand h1{font-family:'DM Serif Display',serif;font-size:1.05rem;font-weight:700;line-height:1.2}
 .brand p{font-size:.68rem;opacity:.75;margin-top:1px}
 .hstats{display:flex;gap:20px}
@@ -161,7 +161,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--P)}
 .tm{display:inline-block;background:var(--P);color:#fff;border-radius:5px;padding:1px 6px;font-size:.7rem;font-weight:800}
 
 /* VALUE COLORS */
-.pxv{color:#1565C0;font-weight:800} .dnv{color:#1E6E3E;font-weight:800}
+.pxv{color:#0D47A1;font-weight:800} .dnv{color:#1E6E3E;font-weight:800}
 .ctv{color:#6A1B9A;font-weight:800} .slv{color:var(--ER);font-weight:800}
 
 /* EMPTY */
