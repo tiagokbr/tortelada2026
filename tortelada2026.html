@@ -263,7 +263,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--P)}
     <div class="sc"><div class="sl">Resultado Líquido</div><div class="sv" id="ds-res">R$ 0,00</div><div class="ss">Arrecadado − Despesas</div><div class="si">📈</div></div>
     <div class="sc"><div class="sl">Ocupação</div><div class="sv" id="ds-ocp">0%</div><div class="ss" id="ds-ocps">0 / 692 lugares</div><div class="si">👥</div></div>
     <div class="sc wn"><div class="sl">A Reembolsar</div><div class="sv" id="ds-rb">R$ 0,00</div><div class="ss" id="ds-rbs">0 pessoa(s)</div><div class="si">🤝</div></div>
-    <div class="sc ok"><div class="sl">Dinheiro em Caixa</div><div class="sv" id="ds-cx">R$ 0,00</div><div class="ss">Espécie conferida</div><div class="si">💵</div></div>
+    <div class="sc ok"><div class="sl">Dinheiro em Espécie</div><div class="sv" id="ds-cx">R$ 0,00</div><div class="ss">Conferência física (só dinheiro)</div><div class="si">💵</div></div>
   </div>
   <div class="card">
     <div class="cb">
@@ -380,8 +380,11 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--P)}
   <div class="sg">
     <div class="sc ok"><div class="sl">Entradas de Caixa</div><div class="sv" id="cx-ent">R$ 0,00</div><div class="ss" id="cx-ents">0 lançamentos</div><div class="si">📥</div></div>
     <div class="sc er"><div class="sl">Saídas de Caixa</div><div class="sv" id="cx-sai">R$ 0,00</div><div class="ss" id="cx-sais">troco, repasses</div><div class="si">📤</div></div>
-    <div class="sc g"><div class="sl">Saldo do Caixa</div><div class="sv" id="cx-sal">R$ 0,00</div><div class="ss">Entradas − Saídas</div><div class="si">🧮</div></div>
+    <div class="sc g"><div class="sl">Resultado dos Lançamentos</div><div class="sv" id="cx-sal">R$ 0,00</div><div class="ss">Entradas − Saídas (só a aba Caixa, todas as formas)</div><div class="si">🧮</div></div>
   </div>
+  <div class="card" style="margin-top:-6px"><div class="cb" style="padding:10px 14px;font-size:.72rem;color:var(--TL);line-height:1.55">
+    ℹ️ <strong>Entenda os dois valores:</strong> o <strong>"Resultado dos Lançamentos"</strong> acima soma apenas o que foi digitado nesta aba Caixa (aportes, rifão, banca, doações, troco, repasses), em dinheiro, PIX e cartão. Já o <strong>"Dinheiro em Espécie"</strong> (abaixo e no Resumo) mostra quanto deve haver fisicamente na gaveta — só dinheiro vivo — considerando também ingressos e despesas pagos em dinheiro. Por medirem coisas diferentes, é normal os dois números não baterem.
+  </div></div>
 
   <div class="card">
     <div class="ch">
@@ -427,7 +430,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--P)}
   </div>
 
   <div class="card">
-    <div class="ch"><span class="ct">💵 Conferência de Dinheiro Físico</span></div>
+    <div class="ch"><span class="ct">💵 Dinheiro em Espécie — Conferência Física</span></div>
     <div class="cb">
       <div style="font-size:.74rem;color:var(--TL);margin-bottom:12px;line-height:1.5">
         Confere o dinheiro em espécie que deve estar em caixa: tudo que entrou em dinheiro,
