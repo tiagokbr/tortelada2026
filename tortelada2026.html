@@ -318,6 +318,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--P)}
           <option value="">Todas as mesas</option>
         </select>
       </div>
+      <div id="aviso-amais" style="display:none;background:#EAF3FF;border:1px solid #B8D4F5;border-radius:8px;padding:9px 12px;margin-bottom:12px;font-size:.75rem;color:#1565C0;line-height:1.7"></div>
       <div class="tc">
         <table>
           <thead><tr>
@@ -1024,8 +1025,20 @@ window.rI = () => {
   const tD=items.reduce((s,i)=>s+(i.din||0),0);
   const tC=items.reduce((s,i)=>s+(i.car||0),0);
   const tSpos=items.filter(i=>i.sld>0).reduce((s,i)=>s+i.sld,0);
-  const tSneg=items.filter(i=>i.sld<0).reduce((s,i)=>s+i.sld,0);
+  const negativos=ings.filter(i=>i.sld<0);
+  const tSneg=negativos.reduce((s,i)=>s+i.sld,0);
   const tS=tSpos+tSneg;
+  // Aviso: lista quem pagou a mais
+  var avisoEl=document.getElementById('aviso-amais');
+  if(avisoEl){
+    if(negativos.length){
+      avisoEl.style.display='block';
+      avisoEl.innerHTML='💰 <strong>'+negativos.length+' ingresso(s) com pagamento a mais</strong> (total '+fmt(tSneg)+'): '
+        + negativos.map(function(i){return '<button onclick="openI(\''+i.id+'\')" style="background:#D4E8FF;border:1px solid #1565C0;color:#1565C0;border-radius:5px;padding:2px 8px;margin:2px;font-size:.72rem;font-weight:700;cursor:pointer;font-family:Inter,sans-serif">'+i.cen+' ('+fmt(i.sld)+')</button>';}).join(' ');
+    } else {
+      avisoEl.style.display='none';
+    }
+  }
   let sldCell;
   if(tSneg<0 && tSpos>0){
     sldCell='<span class="slv">'+fmt(tSpos)+'</span><br><span style="color:#1565C0;font-size:.68rem">a mais '+fmt(tSneg)+'</span>';
