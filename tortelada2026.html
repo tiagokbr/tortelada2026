@@ -310,7 +310,8 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--P)}
         <select id="flIS" onchange="rI()" style="min-width:140px">
           <option value="">Todos os status</option>
           <option value="pago">✅ Pago</option>
-          <option value="pendente">⚠️ Com saldo</option>
+          <option value="pendente">⚠️ Com saldo a pagar</option>
+          <option value="amais">💰 Pago a mais</option>
           <option value="isento">🆓 Isento</option>
         </select>
         <select id="flIM" onchange="rI()" style="min-width:100px">
@@ -989,7 +990,7 @@ window.rI = () => {
   const fM=document.getElementById('flIM').value;
   let items=ings.filter(ing=>{
     const ms=!sr||ing.cen.toLowerCase().includes(sr)||(ing.mes&&ing.mes.toLowerCase().includes(sr))||(ing.obs&&ing.obs.toLowerCase().includes(sr))||(ing.tal&&ing.tal.toString().includes(sr));
-    const ss=!fS||(fS==='pago'&&ing.sld<=0&&ing.val>0)||(fS==='pendente'&&ing.sld>0)||(fS==='isento'&&ing.sta==='isento');
+    const ss=!fS||(fS==='pago'&&ing.sld===0&&ing.val>0)||(fS==='pendente'&&ing.sld>0)||(fS==='amais'&&ing.sld<0)||(fS==='isento'&&ing.sta==='isento');
     const sm=!fM||(ing.mes&&ing.mes.toString()===fM);
     return ms&&ss&&sm;
   });
@@ -998,7 +999,7 @@ window.rI = () => {
     document.getElementById('tfI').innerHTML=''; return;
   }
   tb.innerHTML=items.map(ing=>{
-    const badge=ing.sld>0?`<span class="bdg bdg-wn">⚠️ Pendente</span>`:ing.sta==='isento'?`<span class="bdg bdg-inf">🆓 Isento</span>`:`<span class="bdg bdg-ok">✅ Pago</span>`;
+    const badge=ing.sld>0?`<span class="bdg bdg-wn">⚠️ Pendente</span>`:ing.sld<0?`<span class="bdg bdg-inf">💰 Pago a mais</span>`:ing.sta==='isento'?`<span class="bdg bdg-inf">🆓 Isento</span>`:`<span class="bdg bdg-ok">✅ Pago</span>`;
     const mt=ing.mes?`<span class="tm">${ing.mes}</span>`:'—';
     return `<tr>
       <td><strong>${ing.cen}</strong>${ing.tal?`<br><span style="font-size:.68rem;color:var(--TL)">Talão ${ing.tal}${ing.num?' · '+ing.num:''}</span>`:''}</td>
@@ -1008,7 +1009,7 @@ window.rI = () => {
       <td class="pxv">${ing.pix>0?fmt(ing.pix):'—'}</td>
       <td class="dnv">${ing.din>0?fmt(ing.din):'—'}</td>
       <td class="ctv">${ing.car>0?fmt(ing.car):'—'}</td>
-      <td class="${ing.sld>0?'slv':''}">${ing.sld>0?fmt(ing.sld):'—'}</td>
+      <td class="${ing.sld>0?'slv':''}" style="${ing.sld<0?'color:#1565C0;font-weight:800':''}">${ing.sld>0?fmt(ing.sld):(ing.sld<0?fmt(ing.sld)+' ✚':'—')}</td>
       <td>${mt}</td>
       <td>${badge}</td>
       <td><div style="display:flex;gap:3px">
@@ -1022,13 +1023,23 @@ window.rI = () => {
   const tP=items.reduce((s,i)=>s+(i.pix||0),0);
   const tD=items.reduce((s,i)=>s+(i.din||0),0);
   const tC=items.reduce((s,i)=>s+(i.car||0),0);
-  const tS=items.reduce((s,i)=>s+(i.sld||0),0);
+  const tSpos=items.filter(i=>i.sld>0).reduce((s,i)=>s+i.sld,0);
+  const tSneg=items.filter(i=>i.sld<0).reduce((s,i)=>s+i.sld,0);
+  const tS=tSpos+tSneg;
+  let sldCell;
+  if(tSneg<0 && tSpos>0){
+    sldCell='<span class="slv">'+fmt(tSpos)+'</span><br><span style="color:#1565C0;font-size:.68rem">a mais '+fmt(tSneg)+'</span>';
+  } else if(tSneg<0){
+    sldCell='<span style="color:#1565C0;font-weight:800">'+fmt(tS)+'</span><br><span style="color:#1565C0;font-size:.66rem">pago a mais</span>';
+  } else {
+    sldCell='<span class="slv">'+fmt(tS)+'</span>';
+  }
   document.getElementById('tfI').innerHTML=`
     <td><strong>TOTAL — ${items.length} registro(s)</strong></td>
     <td><strong>${tQ}</strong></td><td></td>
     <td><strong>${fmt(tV)}</strong></td>
     <td class="pxv">${fmt(tP)}</td><td class="dnv">${fmt(tD)}</td><td class="ctv">${fmt(tC)}</td>
-    <td class="slv">${fmt(tS)}</td><td colspan="3"></td>`;
+    <td>${sldCell}</td><td colspan="3"></td>`;
 };
 window.popMF = () => {
   const sel=document.getElementById('flIM');
